@@ -1,0 +1,33 @@
+{
+  "name": "express-test-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanGodPro24/express-test-project.git"
+  },
+  "keywords": [],
+  "author": "Ivan Nepotachev <vanyanep@gmail.com>",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/IvanGodPro24/express-test-project/issues"
+  },
+  "homepage": "https://github.com/IvanGodPro24/express-test-project#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "pino-http": "^10.4.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "eslint": "^9.21.0",
+    "globals": "^16.0.0",
+    "nodemon": "^3.1.9",
+    "pino-pretty": "^13.0.0"
+  }
+}

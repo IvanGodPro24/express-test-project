@@ -1,8 +1,15 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
+// import dotenv from 'dotenv';
 
-const PORT = 8080;
+// dotenv.config();
+
+// const PORT = Number(process.env.PORT);
+
+import { getEnvVar } from './utils/getEnvVar.js';
+
+const PORT = Number(getEnvVar('PORT', '8080'));
 
 export const startServer = () => {
   const app = express();
@@ -22,7 +29,7 @@ export const startServer = () => {
     res.json({ message: 'Hello World!' });
   });
 
-  app.use('*', (err, req, res, next) => {
+  app.use('*', (req, res, next) => {
     res.status(404).json({ message: 'Not Found!' });
   });
 

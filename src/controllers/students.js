@@ -21,10 +21,15 @@ export const getStudentByIdController = async (req, res, next) => {
   try {
     const student = await getStudentById(studentId);
 
+    // if (!student) {
+    //   res.status(404).json({
+    //     message: 'Student not found!',
+    //   });
+    //   return;
+    // }
+
     if (!student) {
-      res.status(404).json({
-        message: 'Student not found!',
-      });
+      next(new Error('Student not found!'));
       return;
     }
 

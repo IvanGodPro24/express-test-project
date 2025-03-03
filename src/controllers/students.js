@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { getAllStudents, getStudentById } from '../services/students.js';
+import createHttpError from 'http-errors';
 
 export const getStudentsController = async (req, res, next) => {
   const students = await getAllStudents();
@@ -11,7 +12,7 @@ export const getStudentsController = async (req, res, next) => {
   });
 };
 
-export const getStudentByIdController = async (req, res, next) => {
+export const getStudentByIdController = async (req, res) => {
   const { studentId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(studentId)) {
@@ -27,9 +28,15 @@ export const getStudentByIdController = async (req, res, next) => {
   //   return;
   // }
 
+  //   if (!student) {
+  //     next(new Error('Student not found!'));
+  //     return;
+  //   }
+
   if (!student) {
-    next(new Error('Student not found!'));
-    return;
+    // next(createHttpError(404, 'Student not found!'));
+    // return;
+    throw createHttpError(404, 'Student not found!');
   }
 
   res.json({

@@ -24,9 +24,7 @@ export const deleteStudent = async (studentId) => {
 
 export const updateStudent = async (studentId, payload, options = {}) => {
   const rawResult = await StudentsCollection.findByIdAndUpdate(
-    {
-      _id: studentId,
-    },
+    studentId,
     payload,
     {
       new: true,

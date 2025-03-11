@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 import createHttpError from 'http-errors';
 import {
   createStudent,
@@ -21,9 +21,9 @@ export const getStudentsController = async (req, res, next) => {
 export const getStudentByIdController = async (req, res) => {
   const { studentId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(studentId)) {
-    return res.status(400).json({ message: 'Invalid student ID Format' });
-  }
+  // if (!mongoose.Types.ObjectId.isValid(studentId)) {
+  //   return res.status(400).json({ message: 'Invalid student ID Format' });
+  // }
 
   const student = await getStudentById(studentId);
 

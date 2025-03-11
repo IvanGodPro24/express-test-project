@@ -32,7 +32,7 @@ export const startServer = () => {
     res.json({ message: 'Hello World!' });
   });
 
-  app.use(studentsRouter);
+  app.use('/students', studentsRouter);
 
   app.use('*', notFoundHandler);
 

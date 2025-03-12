@@ -7,20 +7,47 @@ export const getAllStudents = async ({
   perPage = 10,
   sortBy = '_id',
   sortOrder = SORT_ORDER.ASC,
+  filter = {},
 }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
   const studentsQuery = StudentsCollection.find();
-  const studentsCount = await StudentsCollection.find()
-    .merge(studentsQuery)
-    .countDocuments();
 
-  const students = await studentsQuery
-    .skip(skip)
-    .limit(limit)
-    .sort({ [sortBy]: sortOrder })
-    .exec();
+  if (filter.gender) {
+    studentsQuery.where('gender').equals(filter.gender);
+  }
+  if (filter.minAge) {
+    studentsQuery.where('age').gte(filter.minAge);
+  }
+  if (filter.maxAge) {
+    studentsQuery.where('age').lte(filter.maxAge);
+  }
+  if (filter.minAvgMark) {
+    studentsQuery.where('avgMark').gte(filter.minAvgMark);
+  }
+  if (filter.maxAvgMark) {
+    studentsQuery.where('avgMark').lte(filter.maxAvgMark);
+  }
+
+  // const studentsCount = await StudentsCollection.find()
+  //   .merge(studentsQuery)
+  //   .countDocuments();
+
+  // const students = await studentsQuery
+  //   .skip(skip)
+  //   .limit(limit)
+  //   .sort({ [sortBy]: sortOrder })
+  //   .exec();
+
+  const [studentsCount, students] = await Promise.all([
+    StudentsCollection.find().merge(studentsQuery).countDocuments(),
+    studentsQuery
+      .skip(skip)
+      .limit(limit)
+      .sort({ [sortBy]: sortOrder })
+      .exec(),
+  ]);
 
   const paginationData = calculatePaginationData(studentsCount, perPage, page);
 

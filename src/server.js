@@ -8,9 +8,10 @@ import cors from 'cors';
 // const PORT = Number(process.env.PORT);
 
 import { getEnvVar } from './utils/getEnvVar.js';
-import studentsRouter from './routes/students.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+
+import router from './routes/index.js';
 
 const PORT = Number(getEnvVar('PORT', '8080'));
 
@@ -32,7 +33,7 @@ export const startServer = () => {
     res.json({ message: 'Hello World!' });
   });
 
-  app.use('/students', studentsRouter);
+  app.use(router);
 
   app.use('*', notFoundHandler);
 

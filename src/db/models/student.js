@@ -6,6 +6,9 @@ const studentsSchema = new Schema(
       type: String,
       required: true,
     },
+    photo: {
+      type: String,
+    },
     age: {
       type: Number,
       required: true,

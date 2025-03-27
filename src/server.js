@@ -13,6 +13,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
 import router from './routes/index.js';
+import { UPLOAD_DIR } from './constants/index.js';
 
 const PORT = Number(getEnvVar('PORT', '8080'));
 
@@ -22,6 +23,7 @@ export const startServer = () => {
   app.use(express.json());
   app.use(cors());
   app.use(cookieParser());
+  app.use('/uploads', express.static(UPLOAD_DIR));
 
   app.use(
     pino({
